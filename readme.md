@@ -4,7 +4,7 @@ This sentence was written by a Japanese who can not write English
 
 ## What is 'vim-autoupload'
 
-autoupload.vim will be uploaded automatically when saving files in a specific directory.
+autoupload.vim automatically uploads files under a specific directory
 
 - Protocol: FTP,SFTP,SCP
 - Dependency-Plugin: [Netrw](http://www.drchip.org/astronaut/vim/#NETRW)
@@ -28,9 +28,9 @@ let g:sync_remotedirectory_opentype = 'leftabove vsplit'
 let g:sync_remotefile_opentype = 'leftabove vsplit'
 
 " netrw
-let g:netrw_uid = '' "<-will be changed by this plugin
-let g:netrw_passwd = '' "<-will be changed by this plugin
-let g:netrw_list_cmd = '' "<-will be changed by this plugin
+let g:netrw_uid = '' "<- netrw_uid will be changed by this plugin
+let g:netrw_passwd = '' "<- netrw_passwd will be changed by this plugin
+let g:netrw_list_cmd = '' "<- netrw_list_cmd will be changed by this plugin
 let g:netrw_quiet = 0
 
 " Require if using pagent
@@ -52,7 +52,7 @@ command! ReplaceLocalWithRemote call autoupload#ReplaceLocalWithRemote()
 #### add ~/.vimrc || create ~/.vim/.sync
 
 - create g:autoupload(dictionary) with the local directory as the key.
-- 'uid' and 'passwd' are optional.If you do not set it, it will be entered when uploading.
+- 'uid' and 'passwd' are optional.If you do not set it, you must enter it when uploading
 - If connecting with public key authentication method, set 'uid' and 'passwd' to 'NOTUSE', and start ssh-agent (OSx ssh-agent, windows pagent)
 - 'list' is require if using plink."#####" will be replaced by this plugin. Note: can not move the remote directory with netrw & plink
 
@@ -93,6 +93,7 @@ If editing '/dev/project1/app/bootstrap.php',{RELATIVE_PATH} will be 'app/bootst
 
 ```
 :Nwrite "ftp://miracle-bug.com//public_html/{RELATIVE_PATH}"
+
          ftp://miracle-bug.com//public_html/app/bootstrap.php"
 ```
 
@@ -110,6 +111,7 @@ If editing '/dev/project1/app/bootstrap.php',{RELATIVE_PATH} will be 'app/'
 
 ```
 :e "scp://miracle-bug.com:9999//web/fuel/{RELATIVE_PATH}"
+
     scp://miracle-bug.com:9999//web/fuel/app/"
 ```
 
@@ -123,6 +125,7 @@ If editing '/dev/project1/app/bootstrap.php',{RELATIVE_PATH} will be 'app/bootst
 
 ```
 :vsplit "scp://miracle-bug.com:9999//web/fuel/{RELATIVE_PATH}"
+
          scp://miracle-bug.com:9999//web/fuel/app/bootstrap.php
 ```
 
@@ -136,7 +139,8 @@ If editing '/dev/project1/app/bootstrap.php',{RELATIVE_PATH} will be 'app/bootst
 
 ```
 :e "scp://miracle-bug.com:9999//web/fuel/{RELATIVE_PATH}"
-         scp://miracle-bug.com:9999//web/fuel/app/bootstrap.php
+
+    scp://miracle-bug.com:9999//web/fuel/app/bootstrap.php
 
 :w /dev/project1/app/bootstrap.php
 ```
