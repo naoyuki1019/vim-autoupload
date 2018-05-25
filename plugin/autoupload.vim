@@ -130,18 +130,10 @@ function! s:upload()
     if 1 != l:conf
       return
     endif
-
-    if 1 == s:is_win
-      call s:debuglog('Upload conf is win silent exec', l:cmd)
-      silent exec l:cmd
-    else
-      call s:debuglog('Upload conf not win exec', l:cmd)
-      exec l:cmd
-    endif
-  else
-    call s:debuglog('Upload no conf silent exec', l:cmd)
-    silent exec l:cmd
   endif
+
+  call s:debuglog('Upload', l:cmd)
+  exec l:cmd
 
   if '' != g:sync_logfile
     call s:log('Upload', ':'.l:cmd)
@@ -162,8 +154,9 @@ function! autoupload#OpenRemoteDirectory()
 
   call s:set_netrw_list_cmd(l:remotefullpath)
   let l:cmd = g:sync_remotedirectory_opentype . ' ' . l:remotefullpath
+
   call s:debuglog('OpenRemoteDirectory l:cmd', l:cmd)
-  silent exec l:cmd
+  exec l:cmd
 
   call s:common_end_process()
 endfunction
@@ -206,8 +199,9 @@ function! autoupload#OpenRemoteFile()
 
   let l:remotefullpath = s:make_remotefullpath()
   let l:cmd = g:sync_remotefile_opentype . ' ' . l:remotefullpath
+
   call s:debuglog('OpenRemoteFile l:cmd', l:cmd)
-  silent exec l:cmd
+  exec l:cmd
 
   call s:common_end_process()
 endfunction
@@ -224,7 +218,6 @@ function! autoupload#ReplaceLocalWithRemote()
   let l:curbufnr = bufnr('%')
   let l:remotefullpath = s:make_remotefullpath()
   let l:cmd = 'e ' . l:remotefullpath
-  call s:debuglog('ReplaceLocalWithRemote l:cmd', l:cmd)
 
   if 1 == g:sync_replace_confirm
 
@@ -235,14 +228,10 @@ function! autoupload#ReplaceLocalWithRemote()
     if 1 != l:conf
       return
     endif
-    if 1 == s:is_win
-      silent exec l:cmd
-    else
-      exec l:cmd
-    endif
-  else
-    silent exec l:cmd
   endif
+
+  call s:debuglog('ReplaceLocalWithRemote l:cmd', l:cmd)
+  exec l:cmd
 
   let l:remotebufnr = bufnr('%')
 
@@ -428,7 +417,6 @@ function! s:refresh_path(path)
   endif
 
   call s:debuglog('refresh_path R:path',l:path)
-
   return l:path
 endfunction
 
