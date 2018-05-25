@@ -69,7 +69,7 @@ let s:bak_netrw_list_cmd = ''
 
 " debug
 let s:script_name = expand('<sfile>:t')
-let s:debuglogfile = '~/.vim/debug-'.substitute(s:script_name, '\.vim', '').'.log'
+let s:debuglogfile = '~/.vim/debug-'.substitute(s:script_name, '\.vim', '', '').'.log'
 if !exists('g:sync_debug')
   let s:debug = 0
 else

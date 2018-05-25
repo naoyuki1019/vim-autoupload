@@ -1,6 +1,6 @@
 # Vim Auto Upload
 
-This sentence is written by a Japanese who can not write English.
+This sentence was written by a Japanese who can not write English
 
 ## What is 'vim-autoupload'
 
