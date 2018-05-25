@@ -13,6 +13,8 @@ autoupload.vim will be uploaded automatically when saving files in a specific di
 
 ### Settings
 
+---
+
 #### add ~/.vimrc
 
 ```vim
@@ -45,6 +47,8 @@ command! ReplaceLocalWithRemote call autoupload#ReplaceLocalWithRemote()
 
 ```
 
+---
+
 #### add ~/.vimrc || create ~/.vim/.sync
 
 - create g:autoupload(dictionary) with the local directory as the key.
@@ -74,7 +78,12 @@ let g:autoupload = {
 
 ```
 
+<br />
+<br />
+
 ### command
+
+---
 
 #### call autoupload#UploadFile()
 
@@ -91,6 +100,7 @@ g:sync_upload_confirm = 1, confirmation message appears
 
 image
 
+---
 
 #### call autoupload#OpenRemoteDirectory()
 
@@ -103,6 +113,8 @@ If editing '/dev/project1/app/bootstrap.php',{RELATIVE_PATH} will be 'app/'
     scp://miracle-bug.com:9999//web/fuel/app/"
 ```
 
+---
+
 #### call autoupload#OpenRemoteFile()
 
 Just ':vsplit' (default)
@@ -113,6 +125,8 @@ If editing '/dev/project1/app/bootstrap.php',{RELATIVE_PATH} will be 'app/bootst
 :vsplit "scp://miracle-bug.com:9999//web/fuel/{RELATIVE_PATH}"
          scp://miracle-bug.com:9999//web/fuel/app/bootstrap.php
 ```
+
+---
 
 #### call autoupload#ReplaceLocalWithRemote()
 
