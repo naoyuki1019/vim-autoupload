@@ -39,8 +39,8 @@ endif
 if !exists('g:sync_upload_confirm')
   let g:sync_upload_confirm = 1
 endif
-if !exists('g:sync_download_confirm')
-  let g:sync_download_confirm = 1
+if !exists('g:sync_replace_confirm')
+  let g:sync_replace_confirm = 1
 endif
 if !exists('g:sync_remotedirectory_opentype')
   let g:sync_remotedirectory_opentype = 'leftabove vsplit'
@@ -212,7 +212,7 @@ function! autoupload#OpenRemoteFile()
   call s:common_end_process()
 endfunction
 
-function! autoupload#DownloadRemoteFile()
+function! autoupload#ReplaceLocalWithRemote()
 
   let s:path = s:refresh_path(expand('%:p'))
 
@@ -224,9 +224,9 @@ function! autoupload#DownloadRemoteFile()
   let l:curbufnr = bufnr('%')
   let l:remotefullpath = s:make_remotefullpath()
   let l:cmd = 'e ' . l:remotefullpath
-  call s:debuglog('DownloadRemoteFile l:cmd', l:cmd)
+  call s:debuglog('ReplaceLocalWithRemote l:cmd', l:cmd)
 
-  if 1 == g:sync_download_confirm
+  if 1 == g:sync_replace_confirm
 
     let l:conf = confirm(
           \"autoupload\nWould you like to replace this file with ".
