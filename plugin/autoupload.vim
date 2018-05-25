@@ -179,9 +179,12 @@ function s:set_netrw_list_cmd(remotefullpath)
     " plink
     let l:match = matchstr(s:netrw_list_cmd, '\cplink')
     if '' != l:match
-      let l:remotepath = substitute(a:remotefullpath, '\v^(scp|sftp|ssh):\/\/[^\/]+\/(.*)', '\2', '') . '/'
-      let l:remotepath = substitute(l:remotepath, '\v(\s)', '\\\1', 'g')
-      let g:netrw_list_cmd = substitute(s:netrw_list_cmd, '\v(#####|"#####")', '"'.l:remotepath.'"', '')
+      let l:remotepath = substitute(a:remotefullpath,
+            \'\v^(scp|sftp|ssh):\/\/[^\/]+\/(.*)', '\2', '') . '/'
+      let l:remotepath = substitute(l:remotepath,
+            \'\v(\s)', '\\\1', 'g')
+      let g:netrw_list_cmd = substitute(s:netrw_list_cmd,
+            \'\v(#####|"#####")', '"'.l:remotepath.'"', '')
       call s:debuglog('plink list remotepath:', l:remotepath)
       call s:debuglog('plink g:netrw_list_cmd:', g:netrw_list_cmd)
       return
@@ -415,10 +418,17 @@ function! s:get_connect_settings()
 endfunction
 
 function! s:refresh_path(path)
-  let l:path = substitute(substitute(a:path, '\\', '/', 'g'), ':', '', '')
+  call s:debuglog('refresh_path a:path',a:path)
+  let l:path = a:path
+
+  let l:path = fnamemodify(l:path, ':p')
+  let l:path = substitute(substitute(l:path, '\\', '/', 'g'), ':', '', '')
   if '/' != l:path[0]
     let l:path = '/' . l:path
   endif
+
+  call s:debuglog('refresh_path R:path',l:path)
+
   return l:path
 endfunction
 
@@ -445,7 +455,8 @@ endfunction
 
 function s:log(title, msg)
     silent execute ":redir! >> " . g:sync_logfile
-    silent! echon strftime("%Y-%m-%d %H:%M:%S").' | ('.a:title.') ['.s:path.'] '.a:msg."\n"
+    silent! echon strftime("%Y-%m-%d %H:%M:%S").
+          \' | ('.a:title.') ['.s:path.'] '.a:msg."\n"
     redir END
 endfunction
 
@@ -454,7 +465,8 @@ function! s:debuglog(title, msg)
     return
   endif
   silent execute ":redir! >> " . s:debuglogfile
-  silent! echon strftime("%Y-%m-%d %H:%M:%S").' | '.a:title.':'.a:msg."\n"
+  silent! echon strftime("%Y-%m-%d %H:%M:%S")
+        \.' | '.a:title.':'.a:msg."\n"
   redir END
 endfunction
 
