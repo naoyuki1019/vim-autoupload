@@ -4,7 +4,7 @@ This sentence was written by a Japanese who can not write English
 
 ## What is 'vim-autoupload'
 
-autoupload.vim automatically uploads files under a specific directory
+autoupload.vim automatically uploads files of under mapped directory
 
 - Protocol: FTP,SFTP,SCP
 - Dependency-Plugin: [Netrw](http://www.drchip.org/astronaut/vim/#NETRW)
