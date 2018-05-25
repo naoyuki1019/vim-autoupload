@@ -34,7 +34,7 @@ if !exists('g:sync_settings')
   let g:sync_settings = '~/.vim/.autoupload'
 endif
 if !exists('g:sync_logfile')
-  let g:sync_logfile = '~/vim-autoupload.log'
+  let g:sync_logfile = '~/.vim/autoupload.log'
 endif
 if !exists('g:sync_upload_confirm')
   let g:sync_upload_confirm = 1
@@ -56,8 +56,6 @@ let s:sync_remote_dir = ''
 let s:path = ''
 let s:flg_onUploadFile = 0
 let s:debug = 0
-let s:script_name = expand('<sfile>:t')
-let s:debuglogfile = '~/.vim/debug-'.s:script_name.'.log'
 
 " netrw values
 let s:netrw_uid = ''
@@ -68,6 +66,15 @@ let s:netrw_list_cmd = ''
 " let s:bak_netrw_uid = ''
 " let s:bak_netrw_passwd = ''
 let s:bak_netrw_list_cmd = ''
+
+" debug
+let s:script_name = expand('<sfile>:t')
+let s:debuglogfile = '~/.vim/debug-'.substitute(s:script_name, '\.vim', '').'.log'
+if !exists('g:sync_debug')
+  let s:debug = 0
+else
+  let s:debug = g:sync_debug
+endif
 
 
 function! autoupload#EnableAutoUpload()
