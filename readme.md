@@ -19,11 +19,11 @@ autoupload.vim automatically uploads files of under mapped directory
 
 ```vim
 " autoupload plugin
-let g:sync_enable = 1
-let g:sync_settings = '~/.vim/.autoupload'
-let g:sync_logfile = '' " default ~/.vim/autoupload.log
-let g:sync_upload_confirm = 1
-let g:sync_replace_confirm = 1
+let g:sync_enable = 1 " enable
+let g:sync_settings = '~/.vim/.autoupload' " setting file
+let g:sync_logfile = '' " upload log
+let g:sync_upload_confirm = 1 " show confirm message
+let g:sync_replace_confirm = 1 " show replace message
 let g:sync_default_open_command_remotedirectory = 'leftabove vsplit'
 let g:sync_default_open_command_remotefile = 'leftabove vsplit'
 
@@ -33,7 +33,7 @@ let g:netrw_passwd = '' "<- netrw_passwd will be changed by this plugin
 let g:netrw_list_cmd = '' "<- netrw_list_cmd will be changed by this plugin
 let g:netrw_quiet = 0
 
-" Require if using pagent
+" Require if using windows & pagent.exe(ssh-agent)
 let g:netrw_scp_cmd  = '"C:\\Program Files\\PuTTY\\pscp.exe"'
 let g:netrw_ssh_cmd  = '"C:\\Program Files\\PuTTY\\plink.exe"'
 
