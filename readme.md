@@ -25,7 +25,7 @@ let g:sync_logfile = '' " default ~/.vim/autoupload.log
 let g:sync_upload_confirm = 1
 let g:sync_replace_confirm = 1
 let g:sync_default_open_command_remotedirectory = 'leftabove vsplit'
-let g:sync_default_open_command_remotefile = 'vertical diffsplit'
+let g:sync_default_open_command_remotefile = 'leftabove vsplit'
 
 " netrw
 let g:netrw_uid = '' "<- netrw_uid will be changed by this plugin
@@ -43,6 +43,7 @@ command! DissconnectAutoUpload call autoupload#DissconnectAutoUpload()
 command! UploadFile call autoupload#UploadFile()
 command! OpenRemoteDirectory call autoupload#OpenRemoteDirectory()
 command! OpenRemoteFile call autoupload#OpenRemoteFile()
+command! OpenRemoteFileDiff call autoupload#OpenRemoteFile('vertical diffsplit')
 command! ReplaceLocalWithRemote call autoupload#ReplaceLocalWithRemote()
 
 ```
@@ -137,13 +138,13 @@ If editing '/dev/project1/app/bootstrap.php',{RELATIVE_PATH} will be 'app/bootst
 
 ```
 "default setting
-let g:sync_default_open_command_remotefile = 'vertical diffsplit'
+let g:sync_default_open_command_remotefile = 'leftabove vsplit'
 ```
 
 ```
-:vertical diffsplit "scp://miracle-bug.com:9999//web/fuel/{RELATIVE_PATH}"
+:leftabove vsplit "scp://miracle-bug.com:9999//web/fuel/{RELATIVE_PATH}"
 
-                     scp://miracle-bug.com:9999//web/fuel/app/bootstrap.php
+                   scp://miracle-bug.com:9999//web/fuel/app/bootstrap.php
 ```
 
 ##### example

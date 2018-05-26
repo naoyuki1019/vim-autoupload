@@ -46,7 +46,7 @@ if !exists('g:sync_default_open_command_remotedirectory')
   let g:sync_default_open_command_remotedirectory = 'leftabove vsplit'
 endif
 if !exists('g:sync_default_open_command_remotefile')
-  let g:sync_default_open_command_remotefile = 'vertical diffsplit'
+  let g:sync_default_open_command_remotefile = 'leftabove vsplit'
 endif
 
 let s:sync_local_dir = ''
