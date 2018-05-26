@@ -81,7 +81,7 @@ OSx,linux
 \      'list':'ssh -p 9999 user3@miracle-bug.com "cd "#####";ls -Fa"'
 
 Windows
-\      'list':'"C:\\Program Files\\PuTTY\\plink.exe" -P 9999 user3@miracle-bug.com cd "#####" ; ls -Fa'
+\      'list':'"C:\Program Files\PuTTY\plink.exe" -P 9999 user3@miracle-bug.com "cd "#####" ;ls -Fa"'
 
 \  }
 \}
