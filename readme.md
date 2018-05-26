@@ -21,11 +21,11 @@ autoupload.vim automatically uploads files of under mapped directory
 " autoupload plugin
 let g:sync_enable = 1
 let g:sync_settings = '~/.vim/.autoupload'
-let g:sync_logfile = '~/.vim/autoupload.log'
+let g:sync_logfile = '' " default ~/.vim/autoupload.log
 let g:sync_upload_confirm = 1
 let g:sync_replace_confirm = 1
-let g:sync_remotedirectory_opentype = 'leftabove vsplit'
-let g:sync_remotefile_opentype = 'leftabove vsplit'
+let g:sync_default_open_command_remotedirectory = 'leftabove vsplit'
+let g:sync_default_open_command_remotefile = 'vertical diffsplit'
 
 " netrw
 let g:netrw_uid = '' "<- netrw_uid will be changed by this plugin
@@ -103,30 +103,55 @@ image
 
 ---
 
-#### call autoupload#OpenRemoteDirectory()
+#### call autoupload#OpenRemoteDirectory(...)
 
-Just ':e'
+Just ':'.g:sync_default_open_command_remotedirectory
 
 If editing '/dev/project1/app/bootstrap.php',{RELATIVE_PATH} will be 'app/'
 
 ```
-:e "scp://miracle-bug.com:9999//web/fuel/{RELATIVE_PATH}"
-
-    scp://miracle-bug.com:9999//web/fuel/app/"
+"default setting
+let g:sync_default_open_command_remotedirectory = 'leftabove vsplit'
 ```
 
+```
+:leftabove vsplit "scp://miracle-bug.com:9999//web/fuel/{RELATIVE_PATH}"
+
+                   scp://miracle-bug.com:9999//web/fuel/app/"
+```
+
+##### example
+
+```
+call autoupload#OpenRemoteDirectory('leftabove vsplit')
+call autoupload#OpenRemoteDirectory('tabe')
+call autoupload#OpenRemoteDirectory('e')
+```
 ---
 
-#### call autoupload#OpenRemoteFile()
+#### call autoupload#OpenRemoteFile(...)
 
-Just ':vsplit' (default)
+Just ':'.g:sync_default_open_command_remotefile
 
 If editing '/dev/project1/app/bootstrap.php',{RELATIVE_PATH} will be 'app/bootstrap.php'
 
 ```
-:vsplit "scp://miracle-bug.com:9999//web/fuel/{RELATIVE_PATH}"
+"default setting
+let g:sync_default_open_command_remotefile = 'vertical diffsplit'
+```
 
-         scp://miracle-bug.com:9999//web/fuel/app/bootstrap.php
+```
+:vertical diffsplit "scp://miracle-bug.com:9999//web/fuel/{RELATIVE_PATH}"
+
+                     scp://miracle-bug.com:9999//web/fuel/app/bootstrap.php
+```
+
+##### example
+
+```
+call autoupload#OpenRemoteFile('vertical diffsplit')
+call autoupload#OpenRemoteFile('tabe')
+call autoupload#OpenRemoteFile('e')
 ```
 
 ---

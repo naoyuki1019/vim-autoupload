@@ -42,11 +42,11 @@ endif
 if !exists('g:sync_replace_confirm')
   let g:sync_replace_confirm = 1
 endif
-if !exists('g:sync_remotedirectory_opentype')
-  let g:sync_remotedirectory_opentype = 'leftabove vsplit'
+if !exists('g:sync_default_open_command_remotedirectory')
+  let g:sync_default_open_command_remotedirectory = 'leftabove vsplit'
 endif
-if !exists('g:sync_remotefile_opentype')
-  let g:sync_remotefile_opentype = 'leftabove vsplit'
+if !exists('g:sync_default_open_command_remotefile')
+  let g:sync_default_open_command_remotefile = 'vertical diffsplit'
 endif
 
 let s:sync_local_dir = ''
@@ -149,7 +149,16 @@ function! s:upload()
   call s:common_end_process()
 endfunction
 
-function! autoupload#OpenRemoteDirectory()
+function! autoupload#OpenRemoteDirectory(...)
+
+  if 1 > a:0
+    let l:arg = g:sync_default_open_command_remotedirectory
+  else
+    let l:arg = a:000[0]
+    if '' == l:arg
+      let l:arg = g:sync_default_open_command_remotedirectory
+    endif
+  endif
 
   let s:path = s:refresh_path(expand('%:p:h')).'/'
 
@@ -160,7 +169,7 @@ function! autoupload#OpenRemoteDirectory()
   let l:remotefullpath = s:make_remotefullpath()
 
   call s:set_netrw_list_cmd(l:remotefullpath)
-  let l:cmd = g:sync_remotedirectory_opentype . ' ' . l:remotefullpath
+  let l:cmd = l:arg . ' ' . l:remotefullpath
 
   call s:debuglog('OpenRemoteDirectory l:cmd', l:cmd)
   exec l:cmd
@@ -196,7 +205,16 @@ function s:set_netrw_list_cmd(remotefullpath)
 
 endfunction
 
-function! autoupload#OpenRemoteFile()
+function! autoupload#OpenRemoteFile(...)
+
+  if 1 > a:0
+    let l:arg = g:sync_default_open_command_remotefile
+  else
+    let l:arg = a:000[0]
+    if '' == l:arg
+      let l:arg = g:sync_default_open_command_remotefile
+    endif
+  endif
 
   let s:path = s:refresh_path(expand('%:p'))
 
@@ -205,7 +223,7 @@ function! autoupload#OpenRemoteFile()
   endif
 
   let l:remotefullpath = s:make_remotefullpath()
-  let l:cmd = g:sync_remotefile_opentype . ' ' . l:remotefullpath
+  let l:cmd = l:arg . ' ' . l:remotefullpath
 
   call s:debuglog('OpenRemoteFile l:cmd', l:cmd)
   exec l:cmd
