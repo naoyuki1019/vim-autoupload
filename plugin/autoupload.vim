@@ -49,13 +49,11 @@ if !exists('g:sync_default_open_command_remotefile')
   let g:sync_default_open_command_remotefile = 'leftabove vsplit'
 endif
 
+" private working
 let s:sync_local_dir = ''
 let s:sync_remote_dir = ''
-
-" private working
-let s:path = ''
 let s:flg_onUploadFile = 0
-let s:debug = 0
+let s:path = ''
 
 " netrw values
 let s:netrw_uid = ''
@@ -160,7 +158,7 @@ function! autoupload#OpenRemoteDirectory(...)
     endif
   endif
 
-  let s:path = s:refresh_path(expand('%:p:h')).'/'
+  let s:path = s:refresh_path(expand('%:p:h'))
 
   if 0 == s:common_start_process(1)
     return
@@ -447,13 +445,12 @@ endfunction
 
 function s:make_remotefullpath()
   let l:relative_path = substitute(s:path, s:sync_local_dir, '', '')
-
-  call s:debuglog('s:path', s:path)
-  call s:debuglog('s:sync_local_dir', s:sync_local_dir)
-  call s:debuglog('l:relative_path', l:relative_path)
-
   let l:remotefullpath = s:sync_remote_dir . l:relative_path
   let l:remotefullpath = substitute(l:remotefullpath, '\v(\s)', '\\\1', 'g')
+  call s:debuglog('make_remotefullpath s:path          ', s:path)
+  call s:debuglog('make_remotefullpath s:sync_local_dir', s:sync_local_dir)
+  call s:debuglog('make_remotefullpath l:relative_path ', l:relative_path)
+  call s:debuglog('make_remotefullpath l:remotefullpath', l:remotefullpath)
   return l:remotefullpath
 endfunction
 

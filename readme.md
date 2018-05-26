@@ -33,7 +33,10 @@ let g:netrw_passwd = '' "<- netrw_passwd will be changed by this plugin
 let g:netrw_list_cmd = '' "<- netrw_list_cmd will be changed by this plugin
 let g:netrw_quiet = 0
 
-" Require if using windows & pagent.exe(ssh-agent)
+" macOS, Linux
+let g:netrw_scp_cmd  = 'scp'
+let g:netrw_ssh_cmd  = 'ssh'
+" Windows & pagent(ssh-agent)
 let g:netrw_scp_cmd  = '"C:\\Program Files\\PuTTY\\pscp.exe"'
 let g:netrw_ssh_cmd  = '"C:\\Program Files\\PuTTY\\plink.exe"'
 
@@ -55,7 +58,7 @@ command! ReplaceLocalWithRemote call autoupload#ReplaceLocalWithRemote()
 - create g:autoupload(dictionary) with the local directory as the key.
 - 'uid' and 'passwd' are optional.If you do not set it, you must enter it when uploading
 - If connecting with public key authentication method, set 'uid' and 'passwd' to 'NOTUSE', and start ssh-agent (OSx ssh-agent, windows pagent)
-- 'list' is require if using plink."#####" will be replaced by this plugin. Note: can not move the remote directory with netrw & plink
+- 'list' is require if using autoupload#OpenRemoteDirectory(). "#####" will be replaced by this plugin.
 
 ```vim
 
@@ -73,7 +76,13 @@ let g:autoupload = {
 \      'remote':'scp://miracle-bug.com:9999//web/fuel/',
 \      'uid':'user3',
 \      'passwd':'NOTUSE',
-\      'list':'"C:\\Program Files\\PuTTY\\plink.exe" -P 9999 user3@miracle-bug.com cd "#####" ; ls -a'
+
+OSx,linux
+\      'list':'ssh -p 9999 user3@miracle-bug.com "cd "#####";ls -Fa"'
+
+Windows
+\      'list':'"C:\\Program Files\\PuTTY\\plink.exe" -P 9999 user3@miracle-bug.com cd "#####" ; ls -Fa'
+
 \  }
 \}
 
