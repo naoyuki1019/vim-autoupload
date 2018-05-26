@@ -37,8 +37,8 @@ let g:netrw_quiet = 0
 let g:netrw_scp_cmd  = 'scp'
 let g:netrw_ssh_cmd  = 'ssh'
 " Windows & pagent(ssh-agent)
-let g:netrw_scp_cmd  = '"C:\\Program Files\\PuTTY\\pscp.exe"'
-let g:netrw_ssh_cmd  = '"C:\\Program Files\\PuTTY\\plink.exe"'
+let g:netrw_scp_cmd  = '"C:\Program Files\PuTTY\pscp.exe"'
+let g:netrw_ssh_cmd  = '"C:\Program Files\PuTTY\plink.exe"'
 
 " autoupload plugin's command definition example
 command! EnableAutoUpload call autoupload#EnableAutoUpload()
