@@ -50,7 +50,7 @@ command! ReplaceLocalWithRemote call autoupload#ReplaceLocalWithRemote()
 
 ---
 
-#### add ~/.vimrc || create ~/.vim/.sync
+#### add_to ~/.vimrc OR create ~/.vim/.sync(g:sync_settings)
 
 - create g:autoupload(dictionary) with the local directory as the key.
 - 'uid' and 'passwd' are optional.If you do not set it, you must enter it when uploading
