@@ -44,12 +44,15 @@ let g:netrw_passwd = '' "<- netrw_passwd will be changed by this plugin
 let g:netrw_list_cmd = '' "<- netrw_list_cmd will be changed by this plugin
 let g:netrw_quiet = 0
 
-" macOS, Linux
-let g:netrw_scp_cmd  = 'scp'
-let g:netrw_ssh_cmd  = 'ssh'
-" Windows & pagent(ssh-agent)
-let g:netrw_scp_cmd  = '"C:\\Program Files\\PuTTY\\pscp.exe"'
-let g:netrw_ssh_cmd  = '"C:\\Program Files\\PuTTY\\plink.exe"'
+if has("win32") || has("win95") || has("win64") || has("win16")
+  " Windows & pagent(ssh-agent)
+  let g:netrw_scp_cmd  = '"C:\Program Files\PuTTY\pscp.exe"'
+  let g:netrw_ssh_cmd  = '"C:\Program Files\PuTTY\plink.exe"'
+else
+  " macOS, Linux
+  let g:netrw_scp_cmd  = 'scp'
+  let g:netrw_ssh_cmd  = 'ssh'
+endif
 
 " autoupload plugin's command definition example
 command! EnableAutoUpload call autoupload#EnableAutoUpload()
