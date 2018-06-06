@@ -9,6 +9,17 @@ autoupload.vim automatically uploads files of under mapped directory
 - Protocol: FTP,SFTP,SCP
 - Dependency-Plugin: [Netrw](http://www.drchip.org/astronaut/vim/#NETRW)
 
+#### Operation has been confirmed
+
+|OS|APP|-|
+|---|---|---|
+|CentOS7.5|vim 7.4|ok|
+|CentOS7.5|Neovim 0.2.2|ok|
+|macOS High Sierra|MacVim 8.0|ok|
+|macOS High Sierra|Neovim 0.2.2|ok|
+|Windows10|KaoriYa Vim 8.0|ok|
+
+
 ## How to use
 
 ### Settings
