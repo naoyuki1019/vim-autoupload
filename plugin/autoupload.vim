@@ -39,6 +39,9 @@ endif
 if !exists('g:sync_upload_confirm')
   let g:sync_upload_confirm = 1
 endif
+if !exists('g:sync_upload_silent_execute')
+  let g:sync_upload_silent_execute = 0
+endif
 if !exists('g:sync_replace_confirm')
   let g:sync_replace_confirm = 1
 endif
@@ -138,7 +141,12 @@ function! s:upload()
   endif
 
   call s:debuglog('Upload', l:cmd)
-  exec l:cmd
+
+  if 1 == g:sync_upload_silent_execute
+    silent exec l:cmd
+  else
+    exec l:cmd
+  endif
 
   if '' != g:sync_logfile
     call s:log('Upload', ':'.l:cmd)

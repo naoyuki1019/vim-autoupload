@@ -33,8 +33,9 @@ autoupload.vim automatically uploads files of under mapped directory
 let g:sync_enable = 1 " enable
 let g:sync_settings = '~/.vim/.autoupload' " setting file
 let g:sync_logfile = '' " upload log
-let g:sync_upload_confirm = 1 " show confirm message
-let g:sync_replace_confirm = 1 " show replace message
+let g:sync_upload_confirm = 1 " show upload confirm message
+let g:sync_upload_silent_execute = 1 " silent execute Nwrite
+let g:sync_replace_confirm = 1 " show replace confirm message
 let g:sync_default_open_command_remotedirectory = 'leftabove vsplit'
 let g:sync_default_open_command_remotefile = 'leftabove vsplit'
 
@@ -46,7 +47,7 @@ let g:netrw_quiet = 0
 
 if has("win32") || has("win95") || has("win64") || has("win16")
   " Windows & pagent(ssh-agent)
-  let g:netrw_scp_cmd  = '"C:\Program Files\PuTTY\pscp.exe"'
+  let g:netrw_scp_cmd  = '"C:\Program Files\PuTTY\pscp.exe" -v -batch'
   let g:netrw_ssh_cmd  = '"C:\Program Files\PuTTY\plink.exe"'
 else
   " macOS, Linux
