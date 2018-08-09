@@ -317,12 +317,14 @@ function! s:common_start_process(msgflg)
   "   let s:bak_netrw_uid = g:netrw_uid
   " endif
   let g:netrw_uid = s:netrw_uid
+  call s:debuglog('g:netrw_uid', g:netrw_uid)
 
   " if '' == s:bak_netrw_passwd
   "   let g:netrw_passwd = get(g:, 'netrw_passwd', '')
   "   let s:bak_netrw_passwd = g:netrw_passwd
   " endif
   let g:netrw_passwd = s:netrw_passwd
+  call s:debuglog('g:netrw_passwd', g:netrw_passwd)
 
   if '' == s:bak_netrw_list_cmd
     let g:netrw_list_cmd = get(g:, 'netrw_list_cmd', '')

@@ -49,6 +49,9 @@ if has("win32") || has("win95") || has("win64") || has("win16")
   " Windows & pagent(ssh-agent)
   let g:netrw_scp_cmd  = '"C:\Program Files\PuTTY\pscp.exe" -v -batch'
   let g:netrw_ssh_cmd  = '"C:\Program Files\PuTTY\plink.exe"'
+
+  " Windows & password
+  let g:netrw_scp_cmd  = '"C:\Program Files\PuTTY\pscp.exe" -v -batch -l username -pw password'
 else
   " macOS, Linux
   let g:netrw_scp_cmd  = 'scp'
