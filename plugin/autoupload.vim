@@ -64,9 +64,11 @@ let s:netrw_passwd = ''
 let s:netrw_list_cmd = ''
 
 " netrw default values
-" let s:bak_netrw_uid = ''
-" let s:bak_netrw_passwd = ''
-let s:bak_netrw_list_cmd = ''
+let s:org_netrw_uid = ''
+let s:org_netrw_passwd = ''
+let s:org_netrw_list_cmd = ''
+
+let s:org_netrw_scp_cmd = ''
 
 " debug
 let s:script_name = expand('<sfile>:t')
@@ -198,6 +200,8 @@ function s:set_netrw_list_cmd(remotefullpath)
             \'\v^(scp|sftp|ssh):\/\/[^\/]+\/(.*)', '\2', '') . '/'
       let l:remotepath = substitute(l:remotepath,
             \'\v(\s)', '\\\1', 'g')
+      let s:netrw_list_cmd = substitute(s:netrw_list_cmd, '{uid}', s:netrw_uid, 'g')
+      let s:netrw_list_cmd = substitute(s:netrw_list_cmd, '{passwd}', s:netrw_passwd, 'g')
       let g:netrw_list_cmd = substitute(s:netrw_list_cmd,
             \'\v(#####|"#####")', '"'.l:remotepath.'"', '')
       call s:debuglog('plink list remotepath:', l:remotepath)
@@ -312,34 +316,43 @@ function! s:common_start_process(msgflg)
     return 0
   endif
 
-  " if '' == s:bak_netrw_uid
-  "   let g:netrw_uid = get(g:, 'netrw_uid', '')
-  "   let s:bak_netrw_uid = g:netrw_uid
-  " endif
+  if '' == s:org_netrw_uid
+    let g:netrw_uid = get(g:, 'netrw_uid', '')
+    let s:org_netrw_uid = g:netrw_uid
+  endif
   let g:netrw_uid = s:netrw_uid
   call s:debuglog('g:netrw_uid', g:netrw_uid)
 
-  " if '' == s:bak_netrw_passwd
-  "   let g:netrw_passwd = get(g:, 'netrw_passwd', '')
-  "   let s:bak_netrw_passwd = g:netrw_passwd
-  " endif
+  if '' == s:org_netrw_passwd
+    let g:netrw_passwd = get(g:, 'netrw_passwd', '')
+    let s:org_netrw_passwd = g:netrw_passwd
+  endif
   let g:netrw_passwd = s:netrw_passwd
   call s:debuglog('g:netrw_passwd', g:netrw_passwd)
 
-  if '' == s:bak_netrw_list_cmd
+  if '' == s:org_netrw_list_cmd
     let g:netrw_list_cmd = get(g:, 'netrw_list_cmd', '')
-    let s:bak_netrw_list_cmd = g:netrw_list_cmd
+    let s:org_netrw_list_cmd = g:netrw_list_cmd
   endif
   let g:netrw_list_cmd = s:netrw_list_cmd
+
+  if '' == s:org_netrw_scp_cmd
+    let s:org_netrw_scp_cmd = get(g:, 'netrw_scp_cmd', '')
+  endif
+
+  let g:netrw_scp_cmd = s:org_netrw_scp_cmd
+  let g:netrw_scp_cmd = substitute(g:netrw_scp_cmd, '{uid}', g:netrw_uid, 'g')
+  let g:netrw_scp_cmd = substitute(g:netrw_scp_cmd, '{passwd}', g:netrw_passwd, 'g')
 
   return 1
 
 endfunction
 
 function! s:common_end_process()
-  " let g:netrw_uid = s:bak_netrw_uid
-  " let g:netrw_passwd = s:bak_netrw_passwd
-  let g:netrw_list_cmd = s:bak_netrw_list_cmd
+  let g:netrw_uid = s:org_netrw_uid
+  let g:netrw_passwd = s:org_netrw_passwd
+  let g:netrw_list_cmd = s:org_netrw_list_cmd
+  let g:netrw_scp_cmd = s:org_netrw_scp_cmd
 endfunction
 
 function! s:decide_sync_directory()
