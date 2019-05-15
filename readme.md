@@ -98,8 +98,8 @@ let g:autoupload = {
 OSx,linux
 \      'list':'ssh -p 9999 user3@miracle-bug.com "cd "#####" ;ls -Fa"'
 
-Windows
-\      'list':'"C:\Program Files\PuTTY\plink.exe" -P 9999 user3@miracle-bug.com "cd "#####" ;ls -Fa"'
+Windows (option "-pw {passwd}")
+\      'list':'"C:\Program Files\PuTTY\plink.exe" -pw {passwd} -P 9999 {uid}@miracle-bug.com "cd "#####" ;ls -Fa"'
 
 \  }
 \}
