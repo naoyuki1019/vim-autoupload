@@ -74,7 +74,11 @@ let s:org_netrw_scp_cmd = ''
 let s:script_name = expand('<sfile>:t')
 let s:debuglogfile = '~/.vim/debug-'.substitute(s:script_name, '\.vim', '', '').'.log'
 if !exists('g:sync_debug')
-  let s:debug = 0
+  if !exists('g:autoupload_debug')
+    let s:debug = 0
+  else
+    let s:debug = g:autoupload_debug
+  endif
 else
   let s:debug = g:sync_debug
 endif
